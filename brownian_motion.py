@@ -2,32 +2,34 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-# Set up the figure and axis
-fig, ax = plt.subplots(figsize=(8, 6))
-ax.set_xlim(0, 100)
-ax.set_ylim(-10, 10)
-ax.set_xlabel('Time')
-ax.set_ylabel('Position')
-ax.set_title('Simple Brownian Motion')
+class BrownianMotion:
+    def __init__(self, num_particles=100, dimensions=2, bounds=(-10, 10)):
+        self.num_particles = num_particles
+        self.dimensions = dimensions
+        self.bounds = bounds
+        self.positions = np.random.uniform(bounds[0], bounds[1], (num_particles, dimensions))
+    
+    def update(self):
+        self.positions += np.random.normal(0, 0.1, self.positions.shape)
+        self.positions = np.clip(self.positions, self.bounds[0], self.bounds[1])
 
-# Initialize particles
-num_particles = 5
-lines = [ax.plot([], [], label=f'Particle {i+1}')[0] for i in range(num_particles)]
-ax.legend()
-
-# Initialize data
-t = np.linspace(0, 100, 100)
-positions = np.zeros((num_particles, 100))
-
-# Animation function
 def animate(frame):
-    for i in range(num_particles):
-        if frame > 0:
-            positions[i, frame] = positions[i, frame-1] + np.random.normal(0, 0.5)
-        lines[i].set_data(t[:frame+1], positions[i, :frame+1])
-    return lines
+    brownian.update()
+    scatter.set_offsets(brownian.positions)
+    return scatter,
 
-# Create animation
-anim = FuncAnimation(fig, animate, frames=100, interval=50, blit=True)
+# Set up the simulation
+num_particles = 100
+brownian = BrownianMotion(num_particles)
+
+# Set up the plot
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_xlim(brownian.bounds)
+ax.set_ylim(brownian.bounds)
+ax.set_title("Brownian Motion Simulation")
+scatter = ax.scatter(brownian.positions[:, 0], brownian.positions[:, 1], s=10)
+
+# Create the animation
+anim = FuncAnimation(fig, animate, frames=200, interval=50, blit=True)
 
 plt.show()
