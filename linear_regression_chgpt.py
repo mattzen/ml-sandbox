@@ -7,6 +7,9 @@ np.random.seed(0)
 X = 2 * np.random.rand(100, 1)  # 100 random points for X
 y = 4 + 3 * X + np.random.randn(100, 1)  # y = 4 + 3x + Gaussian noise
 
+
+
+
 # Fit the linear regression model
 model = LinearRegression()
 model.fit(X, y)

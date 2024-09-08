@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-
+# 
 class BrownianMotion:
     def __init__(self, num_particles=100, dimensions=2, bounds=(-10, 10)):
         self.num_particles = num_particles
