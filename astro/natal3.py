@@ -10,7 +10,7 @@ def calculate_precise_positions(birth_date, birth_time, latitude, longitude):
                     birth_datetime.hour + birth_datetime.minute/60.0)
 
     # Set ephemeris path (you need to download these files separately)
-    swe.set_ephe_path('/path/to/ephemeris/files')  # Update this path
+    swe.set_ephe_path('/Users/mattzen/Downloads/swisseph-master/ephe')  # Update this path
 
     # List of planets to calculate (using Swiss Ephemeris constants)
     planets = [(swe.SUN, "Sun"), (swe.MOON, "Moon"), (swe.MERCURY, "Mercury"),
