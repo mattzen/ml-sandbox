@@ -2,14 +2,21 @@ import torch
 from diffusers import FluxPipeline
 from huggingface_hub import login
 
+
+
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+
 login(token="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")
 
 
 
-
 pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-dev", torch_dtype=torch.bfloat16)
-pipe.enable_model_cpu_offload() #save some VRAM by offloading the model to CPU. Remove this if you have enough GPU power
 
+
+
+pipe.enable_model_cpu_offload() #save some VRAM by offloading the model to CPU. Remove this if you have enough GPU power
 prompt = "A cat holding a sign that says hello world"
 image = pipe(
     prompt,

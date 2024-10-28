@@ -2,6 +2,12 @@ import swisseph as swe
 from datetime import datetime
 import pytz
 
+def get_house_cusps(birth_date, birth_time, latitude, longitude):
+    jd = swe.julday(birth_datetime.year, birth_datetime.month, birth_datetime.day,
+                    birth_datetime.hour + birth_datetime.minute/60.0)
+    houses = swe.houses(jd, latitude, longitude, b'P')
+    return houses
+
 def calculate_precise_positions(birth_date, birth_time, latitude, longitude):
     # Convert birth date and time to Julian day
     birth_datetime = datetime.strptime(f"{birth_date} {birth_time}", "%Y-%m-%d %H:%M")
@@ -13,12 +19,14 @@ def calculate_precise_positions(birth_date, birth_time, latitude, longitude):
     swe.set_ephe_path('/Users/mattzen/Downloads/swisseph-master/ephe')  # Update this path
 
     # List of planets to calculate (using Swiss Ephemeris constants)
-    planets = [(swe.SUN, "Sun"), (swe.MOON, "Moon"), (swe.MERCURY, "Mercury"),
+    planets = (swe.SUN, "Sun"), (swe.MOON, "Moon"), (swe.MERCURY, "Mercury"),
                (swe.VENUS, "Venus"), (swe.MARS, "Mars"), (swe.JUPITER, "Jupiter"),
-               (swe.SATURN, "Saturn"), (swe.URANUS, "Uranus"), (swe.NEPTUNE, "Neptune"),
-               (swe.PLUTO, "Pluto")]
+               (swe.SATURN, "Saturn"), (swe.URANUS, "Uranus"), (swe.NEPTUNE, "Neptune"), 
+               (swe.PLUTO, "Pluto")
 
     positions = {}
+
+
 
     for planet_id, planet_name in planets:
         # Calculate planet position

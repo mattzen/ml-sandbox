@@ -4,7 +4,7 @@ from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
-from sklearn.tree import plot_tree
+from sklearn.tree import plot_tree=
 
 # Generate synthetic data
 X, y = make_classification(n_samples=1000, n_features=2, n_informative=2,
@@ -28,9 +28,9 @@ print(f"Accuracy: {accuracy:.2f}")
 cm = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:")
 print(cm)
-
+––
 # Visualize the decision tree
-plt.figure(figsize=(20,10))
+plt.figure(figsize=(20,10)) 
 plot_tree(clf, filled=True, feature_names=['Age', 'Salary'], class_names=['No', 'Yes'])
 plt.title("Decision Tree Classifier")
 plt.show()
